@@ -21,7 +21,7 @@
 		FB322E4E1DDD7BCE00B8885D /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E4D1DDD7BCE00B8885D /* StudentModel.swift */; };
 		FB322E501DDD7C0100B8885D /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E4F1DDD7C0100B8885D /* GCDBlackBox.swift */; };
 		FB322E521DDD7C2200B8885D /* OnTheMapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E511DDD7C2200B8885D /* OnTheMapHelper.swift */; };
-		FB322E541DDD7C3700B8885D /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E531DDD7C3700B8885D /* UdacityClient.swift */; };
+		FB322E541DDD7C3700B8885D /* UdacityClientConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E531DDD7C3700B8885D /* UdacityClientConvenience.swift */; };
 		FB322E561DDD7C4B00B8885D /* ParsingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E551DDD7C4B00B8885D /* ParsingClient.swift */; };
 		FB322E581DDD7CFE00B8885D /* StudentStatusUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB322E571DDD7CFE00B8885D /* StudentStatusUpdate.swift */; };
 /* End PBXBuildFile section */
@@ -64,7 +64,7 @@
 		FB322E4D1DDD7BCE00B8885D /* StudentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
 		FB322E4F1DDD7C0100B8885D /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		FB322E511DDD7C2200B8885D /* OnTheMapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnTheMapHelper.swift; sourceTree = "<group>"; };
-		FB322E531DDD7C3700B8885D /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		FB322E531DDD7C3700B8885D /* UdacityClientConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientConvenience.swift; sourceTree = "<group>"; };
 		FB322E551DDD7C4B00B8885D /* ParsingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingClient.swift; sourceTree = "<group>"; };
 		FB322E571DDD7CFE00B8885D /* StudentStatusUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentStatusUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,19 +146,19 @@
 			path = OnTheMapUITests;
 			sourceTree = "<group>";
 		};
-		FB322E3E1DDD78D500B8885D /* Clients */ = {
+		FB322E3E1DDD78D500B8885D /* Convenience */ = {
 			isa = PBXGroup;
 			children = (
-				FB322E531DDD7C3700B8885D /* UdacityClient.swift */,
+				FB322E531DDD7C3700B8885D /* UdacityClientConvenience.swift */,
 				FB322E551DDD7C4B00B8885D /* ParsingClient.swift */,
 			);
-			name = Clients;
+			name = Convenience;
 			sourceTree = "<group>";
 		};
 		FB322E3F1DDD78E300B8885D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB322E3E1DDD78D500B8885D /* Clients */,
+				FB322E3E1DDD78D500B8885D /* Convenience */,
 				FB322E4D1DDD7BCE00B8885D /* StudentModel.swift */,
 			);
 			name = Model;
@@ -337,7 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB322E541DDD7C3700B8885D /* UdacityClient.swift in Sources */,
+				FB322E541DDD7C3700B8885D /* UdacityClientConvenience.swift in Sources */,
 				FB322E501DDD7C0100B8885D /* GCDBlackBox.swift in Sources */,
 				FB322E581DDD7CFE00B8885D /* StudentStatusUpdate.swift in Sources */,
 				FB322E4E1DDD7BCE00B8885D /* StudentModel.swift in Sources */,
@@ -591,6 +591,7 @@
 				FB322E371DDD78C500B8885D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FB322E381DDD78C500B8885D /* Build configuration list for PBXNativeTarget "OnTheMapTests" */ = {
 			isa = XCConfigurationList;
@@ -599,6 +600,7 @@
 				FB322E3A1DDD78C500B8885D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FB322E3B1DDD78C500B8885D /* Build configuration list for PBXNativeTarget "OnTheMapUITests" */ = {
 			isa = XCConfigurationList;
@@ -607,6 +609,7 @@
 				FB322E3D1DDD78C500B8885D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
