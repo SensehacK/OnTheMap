@@ -101,8 +101,8 @@
                     <navigationItem key="navigationItem" title="On The Map" id="gt0-Fn-TxM">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="tHt-JW-sDu" userLabel="Logout"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Refresh" id="KpW-Kt-ILA"/>
-                            <barButtonItem title="Map" id="2IY-5t-b1W">
+                            <barButtonItem systemItem="refresh" id="KpW-Kt-ILA"/>
+                            <barButtonItem image="Map" id="2IY-5t-b1W">
                                 <connections>
                                     <segue destination="SoD-3e-05l" kind="presentation" id="Isx-f2-c7A"/>
                                 </connections>
@@ -206,8 +206,8 @@
                     <navigationItem key="navigationItem" title="On The Map" id="q9L-u6-uzY">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="93T-yC-pFQ" userLabel="Logout"/>
                         <rightBarButtonItems>
-                            <barButtonItem title="Refresh" id="JtR-w8-pd7"/>
-                            <barButtonItem title="Map" id="wMf-47-ADw">
+                            <barButtonItem systemItem="refresh" id="JtR-w8-pd7"/>
+                            <barButtonItem image="Map" id="wMf-47-ADw">
                                 <connections>
                                     <segue destination="SoD-3e-05l" kind="presentation" id="1ZZ-gw-AYL"/>
                                 </connections>
@@ -220,11 +220,11 @@
             </objects>
             <point key="canvasLocation" x="3020" y="484"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--List-->
         <scene sceneID="2sV-l3-u7J">
             <objects>
                 <navigationController id="DiL-kK-PyN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="hXR-ck-PR5"/>
+                    <tabBarItem key="tabBarItem" title="List" image="List" id="hXR-ck-PR5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lf6-tN-efr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -237,11 +237,11 @@
             </objects>
             <point key="canvasLocation" x="2103" y="484"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Map-->
         <scene sceneID="nig-zx-zMG">
             <objects>
                 <navigationController id="q2D-0W-OLN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="1Mv-PT-h0j"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="Map" id="1Mv-PT-h0j"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5SR-a8-YtL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -274,9 +274,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="List" width="32" height="32"/>
+        <image name="Map" width="32" height="32"/>
         <image name="Udacity_Logo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ZZ-gw-AYL"/>
+        <segue reference="Isx-f2-c7A"/>
     </inferredMetricsTieBreakers>
 </document>
