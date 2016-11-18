@@ -190,7 +190,7 @@ class ParsingClient {
     //MARK : Post User's Location
     // Post User's location
     
-    func postUserLocation (userIDUniqueKey : String , firstName : String , lastName : String , mapString : String , mediaURL : String , latitude : Double , longitude : Double , completionHandlerForPostUserLocation : @escaping (_ success : Bool? , _ error : String?) -> Void ) {
+    func postUserLocation(userIDUniqueKey : String , firstName : String , lastName : String , mapString : String , mediaURL : String , latitude : Double , longitude : Double , completionHandlerForPostUserLocation : @escaping (_ success : Bool , _ error : String?) -> Void ) {
         
         // Create the request
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
@@ -230,7 +230,7 @@ class ParsingClient {
     //MARK : Update User's Location
     // Update User's Location
     
-    func updateUserLocation(userIDUniqueKey : String , objectID : String , firstName : String , lastName : String , mapString : String , mediaURL : String , latitude : Double , longitude : Double , completionHandlerForUpdateUserLocation : @escaping (_ success : Bool? , _ error : String?) -> Void ) {
+    func updateUserLocation(userIDUniqueKey : String , objectID : String , firstName : String , lastName : String , mapString : String , mediaURL : String , latitude : Double , longitude : Double , completionHandlerForUpdateUserLocation : @escaping (_ success : Bool , _ error : String?) -> Void ) {
         
         // Create the request
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation/\(objectID)")!)

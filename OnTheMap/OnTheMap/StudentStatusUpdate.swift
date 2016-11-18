@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class StudentStatusUpdate : UIViewController , MKMapViewDelegate {
+class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDelegate {
     
     //UI view Enums
     
@@ -23,6 +23,33 @@ class StudentStatusUpdate : UIViewController , MKMapViewDelegate {
     var pinplacemark: CLPlacemark? = nil
     
     
+    // Configure UI based on Input given , Default Loading is MapView
+    
+    func configureUI(state : UIState) {
+        
+        if state == .MapView {
+            //Set the default UI State
+            self.configuredUIState = "MapString"
+            findOnMapButton.isEnabled = true
+            searchLocationTextField.isEnabled  = true
+            postStatusLink.isEnabled  = false
+            
+            
+        }
+        
+        if state == .StatusURL {
+            //Set the default UI State
+            self.configuredUIState = "StatusURL"
+            findOnMapButton.isEnabled = true
+            searchLocationTextField.isEnabled  = false
+            postStatusLink.isEnabled  = true
+        }
+        
+        
+        
+        
+    }
+
     
     // Outlets
     
@@ -49,6 +76,8 @@ class StudentStatusUpdate : UIViewController , MKMapViewDelegate {
         super.viewDidLoad()
         
         performUIUpdatesOnMain {
+            
+            
             self.configureUI(state: .MapView)
             
         }
@@ -146,12 +175,34 @@ class StudentStatusUpdate : UIViewController , MKMapViewDelegate {
             
             if UserInfo.objectID.isEmpty {
            
-            
-            
-            
-            
-            
-            
+                //ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success ,error)
+                  
+                    ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
+                        
+                    if success {
+                        
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        
+                        performUIUpdatesOnMain {
+                            
+                            // Set user's location coordinates to center the map on when view controller is dismissed
+                            UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
+                            UserInfo.MapLongitude = (self.pinplacemark!.location!.coordinate.longitude)
+                            // Also keep track of other information entered by user
+                            UserInfo.MapString = self.locationStudyingFrom.text!
+                            UserInfo.UserURLStatus = self.postStatusLink.text!
+                            
+                            self.dismiss(animated: true, completion: nil)
+                            
+                        }
+                        
+                    } else {
+                        
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.displayAlertHelper(message: error!)
+                        
+                    }
+                }
             
             
             } // UserInfo End Object ID } Declaration
@@ -217,31 +268,5 @@ class StudentStatusUpdate : UIViewController , MKMapViewDelegate {
     
     
     
-    // Configure UI based on Input given , Default Loading is MapView 
-    
-    func configureUI(state : UIState) {
-        
-        if state == .MapView {
-             //Set the default UI State
-            self.configuredUIState = "MapString"
-            findOnMapButton.isEnabled = true
-            searchLocationTextField.isEnabled  = true
-            postStatusLink.isEnabled  = false
-            
-            
-        }
-        
-        if state == .StatusURL {
-            //Set the default UI State
-            self.configuredUIState = "StatusURL"
-            findOnMapButton.isEnabled = true
-            searchLocationTextField.isEnabled  = false
-            postStatusLink.isEnabled  = true
-        }
-
-        
-        
-        
-    }
-    
+       
 }
