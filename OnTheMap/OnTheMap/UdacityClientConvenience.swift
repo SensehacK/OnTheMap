@@ -11,6 +11,15 @@ import Foundation
 
 class UdacityClientConvenience {
     
+    // MARK: Shared Instance
+    
+    class func sharedInstance() -> UdacityClientConvenience {
+        struct Singleton {
+            static var sharedInstance = UdacityClientConvenience()
+        }
+        return Singleton.sharedInstance
+    }
+
     
     //session initialised
     //var session = URLSession.shared
@@ -92,7 +101,7 @@ class UdacityClientConvenience {
         
     }
     
-    
+    //Mark : Identify User Session Key
     func identifyUserWithSessionKey(userSessionKey : String , completionHandlerforIdentifyUserWithSessionKey : @escaping ( _ success : Bool? , _ error : String?) -> Void  ) {
         
         
@@ -151,6 +160,7 @@ class UdacityClientConvenience {
         task.resume()
     }
     
+    
     // MARK : Deleting Session 
     
     func deleteUserSession ( completionHandlerDeleteUserSession : @escaping ( _ success : Bool , _ error : String?) -> Void ) {
@@ -192,17 +202,6 @@ class UdacityClientConvenience {
         task.resume()
     }
     
-    
-    // MARK: Shared Instance
-    
-    class func sharedInstance() -> UdacityClientConvenience {
-        struct Singleton {
-            static var sharedInstance = UdacityClientConvenience()
-        }
-        return Singleton.sharedInstance
-    }
-
-    
-    
+    // End Declaration Bracket
     
 }
