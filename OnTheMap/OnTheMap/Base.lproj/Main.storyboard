@@ -97,7 +97,7 @@
         <!--On The Map-->
         <scene sceneID="ZYh-ej-9MS">
             <objects>
-                <viewController id="I3c-Nf-hgt" sceneMemberID="viewController">
+                <viewController id="I3c-Nf-hgt" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1sg-6X-7MV"/>
                         <viewControllerLayoutGuide type="bottom" id="4WF-UG-oR1"/>
@@ -134,7 +134,7 @@
         <!--Student Status Update-->
         <scene sceneID="9I2-oI-UUz">
             <objects>
-                <viewController id="SoD-3e-05l" customClass="StudentStatusUpdate" sceneMemberID="viewController">
+                <viewController id="SoD-3e-05l" customClass="StudentStatusUpdate" customModule="OnTheMap" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wTL-mc-usj"/>
                         <viewControllerLayoutGuide type="bottom" id="FCU-js-OnG"/>
@@ -147,19 +147,61 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cU-5D-Sa6" userLabel="Cancel">
                                         <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="SoD-3e-05l" eventType="touchUpInside" id="Gwx-KQ-Qsk"/>
+                                        </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Post Status Link" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qG8-6C-MOo">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you Studying From?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AT-Ce-loN">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="Urp-al-2EE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="9cU-5D-Sa6" secondAttribute="trailing" constant="8" id="6en-NJ-dcT"/>
+                                    <constraint firstItem="qG8-6C-MOo" firstAttribute="top" secondItem="1AT-Ce-loN" secondAttribute="bottom" constant="-86" id="BCj-la-FeT"/>
+                                    <constraint firstAttribute="trailing" secondItem="1AT-Ce-loN" secondAttribute="trailing" constant="17" id="P9P-Jf-9RQ"/>
                                     <constraint firstItem="9cU-5D-Sa6" firstAttribute="top" secondItem="c5d-9Q-LBg" secondAttribute="top" constant="8" id="bcR-qg-3me"/>
+                                    <constraint firstItem="1AT-Ce-loN" firstAttribute="top" secondItem="9cU-5D-Sa6" secondAttribute="bottom" constant="80" id="bpQ-Dv-qnw"/>
+                                    <constraint firstItem="qG8-6C-MOo" firstAttribute="leading" secondItem="c5d-9Q-LBg" secondAttribute="leading" constant="45" id="cDh-rq-7gq"/>
                                     <constraint firstAttribute="width" constant="375" id="h7e-X8-6n5"/>
+                                    <constraint firstItem="1AT-Ce-loN" firstAttribute="leading" secondItem="c5d-9Q-LBg" secondAttribute="leading" constant="19" id="lpu-eE-0wQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="qG8-6C-MOo" secondAttribute="trailing" constant="44" id="zET-rE-Sgc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L34-VO-XgS" userLabel="MidView">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Location Eg: Vasai Road, Maharashtra" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CSx-hF-K89">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.43406239280423625" green="0.89411764709999997" blue="0.71018209603923932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.088181932830000004" green="0.89411764709999997" blue="0.67359261270000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="CSx-hF-K89" secondAttribute="bottom" constant="271" id="3Ex-F9-QBb"/>
+                                    <constraint firstItem="CSx-hF-K89" firstAttribute="leading" secondItem="L34-VO-XgS" secondAttribute="leading" constant="17" id="FV9-SD-S7p"/>
+                                    <constraint firstItem="CSx-hF-K89" firstAttribute="top" secondItem="L34-VO-XgS" secondAttribute="top" constant="27" id="TIs-7U-Jqb"/>
+                                    <constraint firstAttribute="trailing" secondItem="CSx-hF-K89" secondAttribute="trailing" constant="18" id="ZIk-vI-icH"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtF-D8-sOX" userLabel="BottomView">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dji-BG-JC3" userLabel="Submit">
                                         <state key="normal" title="Find On Map"/>
+                                        <connections>
+                                            <action selector="findOnMapButtonPressed:" destination="SoD-3e-05l" eventType="touchUpInside" id="Iz4-Z8-uf6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.39109320079999998" blue="0.2423949192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,10 +211,10 @@
                                     <constraint firstAttribute="width" constant="375" id="kFo-iE-YtD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L34-VO-XgS" userLabel="MidView">
-                                <color key="backgroundColor" red="0.43406239280423625" green="0.89411764709999997" blue="0.71018209603923932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.088181932830000004" green="0.89411764709999997" blue="0.67359261270000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0eR-bU-BAv">
+                                <frame key="frameInset" minY="249" width="375" height="270"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -185,11 +227,24 @@
                             <constraint firstItem="c5d-9Q-LBg" firstAttribute="trailing" secondItem="L34-VO-XgS" secondAttribute="trailing" id="dm3-BJ-AAo"/>
                             <constraint firstItem="c5d-9Q-LBg" firstAttribute="leading" secondItem="L34-VO-XgS" secondAttribute="leading" id="eQM-Ps-v3C"/>
                             <constraint firstItem="KtF-D8-sOX" firstAttribute="bottom" secondItem="FCU-js-OnG" secondAttribute="top" id="h8s-bn-hPh"/>
+                            <constraint firstItem="CSx-hF-K89" firstAttribute="top" secondItem="c5d-9Q-LBg" secondAttribute="bottom" constant="26" id="heE-IW-CbU"/>
                             <constraint firstItem="L34-VO-XgS" firstAttribute="top" secondItem="wTL-mc-usj" secondAttribute="bottom" constant="171" id="kif-K4-0hJ"/>
                             <constraint firstAttribute="bottom" secondItem="L34-VO-XgS" secondAttribute="bottom" constant="148" id="lhG-99-63y"/>
                             <constraint firstItem="KtF-D8-sOX" firstAttribute="top" secondItem="L34-VO-XgS" secondAttribute="bottom" id="nhi-jL-IVN"/>
+                            <constraint firstItem="CSx-hF-K89" firstAttribute="top" secondItem="1AT-Ce-loN" secondAttribute="bottom" constant="51" id="u9n-6n-n4t"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomView" destination="KtF-D8-sOX" id="zcg-sr-MQD"/>
+                        <outlet property="cancelButton" destination="9cU-5D-Sa6" id="se0-nQ-U5X"/>
+                        <outlet property="findOnMapButton" destination="Dji-BG-JC3" id="PEK-55-ocX"/>
+                        <outlet property="locationStudyingFrom" destination="1AT-Ce-loN" id="kgS-4R-Lsq"/>
+                        <outlet property="mapView" destination="0eR-bU-BAv" id="yWg-sM-4BD"/>
+                        <outlet property="midView" destination="L34-VO-XgS" id="6RZ-aJ-dlo"/>
+                        <outlet property="postStatusLink" destination="qG8-6C-MOo" id="ssl-Ak-Qih"/>
+                        <outlet property="searchLocationTextField" destination="CSx-hF-K89" id="TO1-do-U5T"/>
+                        <outlet property="topView" destination="c5d-9Q-LBg" id="ROt-yF-YGa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdc-Hs-Ek6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -208,7 +263,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LHM-H6-Rcd" id="EGm-YQ-zAb">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
