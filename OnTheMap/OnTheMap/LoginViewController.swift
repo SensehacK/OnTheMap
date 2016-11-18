@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController : UIViewController {
 
+    // Outlets 
     
     @IBOutlet weak var emailAddressTextField: UITextField!
     
@@ -21,26 +22,12 @@ class LoginViewController : UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    // Login Button Actions
     
     @IBAction func loginButtonPressed(_ sender: AnyObject) {
         
         //Disabled UI
         setUIEnabled(enabled: false)
-        
         
         //Get Valid username 
         // Still "@" Valid statement is not been checked.
@@ -48,19 +35,43 @@ class LoginViewController : UIViewController {
             displayAlertHelper(message: "Please Enter a Valid Email Address")
             return
         }
-        
+        // Guard Password is Not Empty.
         guard passwordTextField.text != nil else {
             displayAlertHelper(message: "Please Enter a Password")
             return
         }
         
+        // MARK: Log in  Get User Session ID
         
-        
+        UdacityClientConvenience.sharedInstance().getUserSessionKey(username: emailAddressTextField.text!, password: passwordTextField.text!) { (userSessionKey , error) in
+            
+            // Userkey returns value which means it passed success
+            if let userKey = userSessionKey {
+                // Verify User Session key with Udacity
+                
+                UdacityClientConvenience.sharedInstance().identifyUserWithSessionKey(userSessionKey: userKey) { (success, error ) in
+                    
+                    // Check back returned value by completion handler of Identify USer SEssion Key method
+                    if success! {
+                        self.completeLogin()
+                    } else {
+                        print("Error Couldn't identify the Session Key of USer")
+                        self.displayAlertHelper(message: error!)
+                    }
+                }
+            } else {
+                //Enable the UI , Print some logs for Console Debugging & Display the error.
+                self.setUIEnabled(enabled: false)
+                print("Coudln't Find User Key in get User Session Method ")
+                self.displayAlertHelper(message: error!)
+            }
+            
+        }
     }
     
     
     @IBAction func signUpButtonPressed(_ sender: AnyObject) {
-        
+        displayAlertHelper(message: "Please Sign up at https://www.udacity.com/account/auth#!/signup")
     }
     
     
@@ -75,7 +86,14 @@ class LoginViewController : UIViewController {
     }
 
     
+    // MARK: Hide keyboard when return key is pressed and perform submit action
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        loginButton.sendActions(for: .touchUpInside)
+        return false
+    }
+
     
     
     
