@@ -52,26 +52,27 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         if state == .MapView {
             //Set the default UI State
             self.configuredUIState = "MapView"
+            mapView.isHidden = true
             findOnMapButton.isEnabled = true
             searchLocationTextField.isEnabled  = true
             postStatusLink.isEnabled  = false
             findOnMapButton.setTitle("Find on the Map", for: UIControlState.normal)
             locationStudyingFrom.isHidden = false
+            cancelButton.setTitleColor(UIColor.red, for: .normal)
         }
         
         if state == .StatusURL {
             //Set the default UI State
             self.configuredUIState = "StatusURL"
+            mapView.isHidden = false
             findOnMapButton.isEnabled = false
             searchLocationTextField.isEnabled  = false
             postStatusLink.isEnabled  = true
             findOnMapButton.setTitle("Update Status", for: UIControlState.normal)
             locationStudyingFrom.isHidden = true
+            cancelButton.setTitleColor(UIColor.green, for: .normal)
         }
-        
-        
-        
-        
+
     }
 
     
