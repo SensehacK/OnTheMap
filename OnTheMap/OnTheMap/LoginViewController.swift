@@ -15,7 +15,7 @@ class LoginViewController : UIViewController {
     @IBOutlet weak var emailAddressTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-    
+    // Activated the property "Secure Text Entry" so that we can enter the password securely. Thanks for the Suggestion
     
     @IBOutlet weak var loginButton: UIButton!
     

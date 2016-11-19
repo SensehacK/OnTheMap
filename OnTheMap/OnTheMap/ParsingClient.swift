@@ -47,7 +47,8 @@ class ParsingClient {
             // first guard for error is empty
             guard error == nil else {
                 print(error)
-                completionHandlerforGetStudentsLocation(false, "Error found on 1st Guard UserSessionKey")
+                print("Error found on 1st Guard UserSessionKey")
+                completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
                 return
             }
             /*
@@ -59,7 +60,11 @@ class ParsingClient {
             
             //Data is empty or not
             guard let data = data else {
-                completionHandlerforGetStudentsLocation(false, "Error found on 3rd Guard Data Empty UserSessionKey")
+                //Console Prints for Debugging
+                print(error)
+                print("Error found on 3rd Guard Data Empty UserSessionKey")
+                // More meaningful User Error
+                completionHandlerforGetStudentsLocation(false, "Couldn't Download Data")
                 return
             }
 
