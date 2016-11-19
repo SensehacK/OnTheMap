@@ -16,11 +16,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
     
     // let parsedClient = ParsingClient.sharedInstance() 
     
-    
-    
-    override func viewDidLoad() {
-        <#code#>
-    }
+
     
     // MARK: View Will appear
     override func viewWillAppear(_ animated: Bool) {

@@ -46,10 +46,10 @@ class LoginViewController : UIViewController {
         UdacityClientConvenience.sharedInstance().getUserSessionKey(username: emailAddressTextField.text!, password: passwordTextField.text!) { (userSessionKey , error) in
             
             // Userkey returns value which means it passed success
-            if let userKey = userSessionKey {
+            if let userSessionKey = userSessionKey {
                 // Verify User Session key with Udacity
                 
-                UdacityClientConvenience.sharedInstance().identifyUserWithSessionKey(userSessionKey: userKey) { (success, error ) in
+                UdacityClientConvenience.sharedInstance().identifyUserWithSessionKey(userSessionKey: userSessionKey) { (success, error ) in
                     
                     // Check back returned value by completion handler of Identify USer SEssion Key method
                     if success! {
@@ -61,8 +61,8 @@ class LoginViewController : UIViewController {
                 }
             } else {
                 //Enable the UI , Print some logs for Console Debugging & Display the error.
-                self.setUIEnabled(enabled: false)
-                print("Coudln't Find User Key in get User Session Method ")
+                self.setUIEnabled(enabled: true)
+                print("Coudln't Find User Key in get User Session Method of Login button Pressed Action ")
                 self.displayAlertHelper(message: error!)
             }
             

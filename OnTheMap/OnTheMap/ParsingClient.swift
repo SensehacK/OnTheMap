@@ -50,12 +50,12 @@ class ParsingClient {
                 completionHandlerforGetStudentsLocation(false, "Error found on 1st Guard UserSessionKey")
                 return
             }
-            
+            /*
             // Status code msgs
             guard let statusCodes = (response as? HTTPURLResponse)?.statusCode , statusCodes >= 200 && statusCodes <= 299 else {
                 completionHandlerforGetStudentsLocation(false, "Wrong Status Codes Returned")
                 return
-            }
+            } */
             
             //Data is empty or not
             guard let data = data else {
@@ -116,12 +116,13 @@ class ParsingClient {
                 return
             }
             
-            
+            /*
             // Status code msgs
             guard let statusCodes = (response as? HTTPURLResponse)?.statusCode , statusCodes >= 200 && statusCodes <= 299 else {
                 completionHandlerForGetUserLocation(false, "Wrong Status Codes Returned (func getUserLocation)")
                 return
-            }
+            } */
+            
             
             //Data is empty or not
             guard let data = data else {

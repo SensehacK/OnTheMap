@@ -27,8 +27,10 @@ class UdacityClientConvenience {
     
     //Mark : Get User Session Key
     
-    func getUserSessionKey(username : String,password : String, completionHandlerForUserSessionKey: @escaping (_ userkey : String? , _ error  : String? ) -> Void ) {
+    func getUserSessionKey(username : String, password : String, completionHandlerForUserSessionKey: @escaping (_ userkey : String? , _ error  : String? ) -> Void ) {
         
+        // Console Debug Prints
+        print("In func getUserSessionKey ")
     
         //Configure the Udacity API session key
         
@@ -36,15 +38,23 @@ class UdacityClientConvenience {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
+        
+        // Console Debug Prints
+        print("In func getUserSessionKey after Request has added Header fields ")
         
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
         
         //make task network request
         let session = URLSession.shared
+        
+        // Console Debug Prints
+        print("In func getUserSessionKey making task network request ")
+        
         let task = session.dataTask(with: request as URLRequest) { data ,response , error in
+            
+            // Console Debug Prints
+            print("In func getUserSessionKey inside task network request ")
             
             // guard statements incoming
             
@@ -55,12 +65,13 @@ class UdacityClientConvenience {
                 return
             }
             
-            
+            /*
             // Status code msgs
             guard let statusCodes = (response as? HTTPURLResponse)?.statusCode , statusCodes >= 200 && statusCodes <= 299 else {
                 completionHandlerForUserSessionKey(nil, "Wrong Status Codes Returned")
                 return
-            }
+            } */
+            
             
             //Data is empty or not
             guard let data = data else {
@@ -68,16 +79,22 @@ class UdacityClientConvenience {
                 return
             }
             
-            
-            // Parsing data 
-            
+            // Parsing data
             let parsedData : AnyObject
+           
+            // Console Debug Prints
+            print("In func getUserSessionKey after Guard Statements task network request ")
+            
             
             do {
                 parsedData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! NSDictionary
+                
+                // Console Debug Prints
+                print("In func getUserSessionKey PArsing Data with JSONSerialization  task network request ")
+                
             } catch {
-                print("Error Catched in Parsing Data")
-                completionHandlerForUserSessionKey(nil, "Error Parsing Data")
+                print("Error Catched in Parsing Data in JSONSerialization Block ")
+                completionHandlerForUserSessionKey(nil, "Error Parsing Data in JSON Serialization block of getUserSession")
                 return
             }
         
@@ -86,6 +103,7 @@ class UdacityClientConvenience {
             
             if let userSessionKey = (parsedData["account"] as? [String: Any])? ["key"] as? String {
             UserInfo.userKey = userSessionKey
+                
             //Printing User Session Keys
                 print(userSession2)
                 print(userSessionKey)
