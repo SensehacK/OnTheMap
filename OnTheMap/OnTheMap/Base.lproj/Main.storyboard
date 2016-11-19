@@ -126,6 +126,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapViewController" destination="sTk-Cl-8l9" id="lD9-Nb-aw6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHR-en-qt6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -350,6 +353,6 @@
         <image name="Udacity_Logo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ZZ-gw-AYL"/>
+        <segue reference="Isx-f2-c7A"/>
     </inferredMetricsTieBreakers>
 </document>

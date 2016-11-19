@@ -23,33 +23,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
     var pinplacemark: CLPlacemark? = nil
     
     
-    // Configure UI based on Input given , Default Loading is MapView
     
-    func configureUI(state : UIState) {
-        
-        if state == .MapView {
-            //Set the default UI State
-            self.configuredUIState = "MapString"
-            findOnMapButton.isEnabled = true
-            searchLocationTextField.isEnabled  = true
-            postStatusLink.isEnabled  = false
-            
-            
-        }
-        
-        if state == .StatusURL {
-            //Set the default UI State
-            self.configuredUIState = "StatusURL"
-            findOnMapButton.isEnabled = true
-            searchLocationTextField.isEnabled  = false
-            postStatusLink.isEnabled  = true
-        }
-        
-        
-        
-        
-    }
-
     
     // Outlets
     
@@ -70,6 +44,36 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
     
     
     
+    // Configure UI based on Input given , Default Loading is MapView
+    
+    func configureUI(state : UIState) {
+        
+        if state == .MapView {
+            //Set the default UI State
+            self.configuredUIState = "MapString"
+            findOnMapButton.isEnabled = true
+            searchLocationTextField.isEnabled  = true
+            postStatusLink.isEnabled  = false
+            findOnMapButton.setTitle("Find on the Map", for: UIControlState.normal)
+            locationStudyingFrom.isHidden = false
+        }
+        
+        if state == .StatusURL {
+            //Set the default UI State
+            self.configuredUIState = "StatusURL"
+            findOnMapButton.isEnabled = false
+            searchLocationTextField.isEnabled  = false
+            postStatusLink.isEnabled  = true
+            findOnMapButton.setTitle("Update Status", for: UIControlState.normal)
+            locationStudyingFrom.isHidden = true
+        }
+        
+        
+        
+        
+    }
+
+    
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
@@ -77,7 +81,11 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         
         performUIUpdatesOnMain {
             
-            
+            // https Prefix for URL to be shared
+            if self.postStatusLink.tag == 1 {
+                self.postStatusLink.text = "https://"
+            }
+           
             self.configureUI(state: .MapView)
             
         }
@@ -158,7 +166,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
             })
            }
             
-        }
+        } // Status URL configured UI  } End declaration
         
             // MARK : Status URL configured UI
         else if configuredUIState == "StatusURL" {
@@ -181,7 +189,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         
                     if success {
                         
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                       
                         
                         performUIUpdatesOnMain {
                             
@@ -198,29 +206,44 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         
                     } else {
                         
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        
                         self.displayAlertHelper(message: error!)
                         
                     }
                 }
             
-            
             } // UserInfo End Object ID } Declaration
             else {
                 // User is updating his Post
                 
+                ParsingClient.sharedInstance().updateUserLocation(userIDUniqueKey: UserInfo.userKey, objectID: UserInfo.objectID , firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                 
+                    if success {
+                        
+                        
+                        performUIUpdatesOnMain {
+                            
+                            // Set user's location coordinates to center the map on when view controller is dismissed
+                            UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
+                            UserInfo.MapLongitude = (self.pinplacemark!.location!.coordinate.longitude)
+                            // Also keep track of other information entered by user
+                            UserInfo.MapString = self.locationStudyingFrom.text!
+                            UserInfo.UserURLStatus = self.postStatusLink.text!
+                            
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        
+                    } else {
+                        self.displayAlertHelper(message: error!)
+                        
+                    } // else completion
+                } // Update userlocation } completion
                 
-                
-            } // Else Declaration }
-            
-            
-            
-            
-        }
+            } // Else Declaration }  // User is updating his Post
+  
+        } // Status URL configured UI } End Declaration
         
-        
-    }
+    }  // findOnMapButtonPressed End } Declaration
     
     
     
@@ -235,38 +258,14 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         return false
     }
 
+    // MARK: Automatically prefix hyperlinks with https
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.tag == 1 {
+            textField.text = "https://"
+        }
+    }
+
     
        
 }
