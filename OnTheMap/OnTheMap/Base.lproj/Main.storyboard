@@ -115,9 +115,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="gt0-Fn-TxM">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="tHt-JW-sDu" userLabel="Logout"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="tHt-JW-sDu" userLabel="Logout">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="I3c-Nf-hgt" id="7qn-2A-I9T"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="KpW-Kt-ILA"/>
+                            <barButtonItem systemItem="refresh" id="KpW-Kt-ILA">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="I3c-Nf-hgt" id="fRP-ai-fSG"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="Map" id="2IY-5t-b1W">
                                 <connections>
                                     <segue destination="SoD-3e-05l" kind="presentation" id="Isx-f2-c7A"/>
