@@ -40,7 +40,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HAe-3G-dGT">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUg-xh-SVg">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -97,7 +97,7 @@
         <!--On The Map-->
         <scene sceneID="ZYh-ej-9MS">
             <objects>
-                <viewController id="I3c-Nf-hgt" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController id="I3c-Nf-hgt" customClass="MapViewController" customModule="OnTheMap" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1sg-6X-7MV"/>
                         <viewControllerLayoutGuide type="bottom" id="4WF-UG-oR1"/>
@@ -138,7 +138,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="mapViewController" destination="sTk-Cl-8l9" id="lD9-Nb-aw6"/>
+                        <outlet property="mapViewController" destination="sTk-Cl-8l9" id="OUq-Ol-Ypc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHR-en-qt6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -394,6 +394,6 @@
         <image name="Udacity_Logo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ZZ-gw-AYL"/>
+        <segue reference="Isx-f2-c7A"/>
     </inferredMetricsTieBreakers>
 </document>

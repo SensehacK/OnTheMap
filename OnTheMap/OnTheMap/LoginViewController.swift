@@ -41,6 +41,9 @@ class LoginViewController : UIViewController {
             return
         }
         
+        //Network Activity visible
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         // MARK: Log in  Get User Session ID
         
         UdacityClientConvenience.sharedInstance().getUserSessionKey(username: emailAddressTextField.text!, password: passwordTextField.text!) { (userSessionKey , error) in
@@ -55,11 +58,14 @@ class LoginViewController : UIViewController {
                     if success! {
                         self.completeLogin()
                     } else {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         print("Error Couldn't identify the Session Key of USer")
                         self.displayAlertHelper(message: error!)
                     }
                 }
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
                 //Enable the UI , Print some logs for Console Debugging & Display the error.
                 self.setUIEnabled(enabled: true)
                 print("Coudln't Find User Key in get User Session Method of Login button Pressed Action ")
@@ -117,6 +123,7 @@ class LoginViewController : UIViewController {
     
     
     func completeLogin() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Console Debug Prints
         print("In func Complete Login of LoginViewController ")
         
