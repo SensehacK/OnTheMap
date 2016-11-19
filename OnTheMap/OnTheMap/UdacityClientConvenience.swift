@@ -99,24 +99,27 @@ class UdacityClientConvenience {
                 completionHandlerForUserSessionKey(nil, "Error Parsing Data in JSON Serialization block of getUserSession")
                 return
             }
-        
-             let account = parsedData["account"] as! [String:Any]
+            
+            
+           /*  if let account = parsedData["account"] as! [String:Any] {
+  
              let userSession2 = account["key"] as! String
+        } */
             
             if let userSessionKey = (parsedData["account"] as? [String: Any])? ["key"] as? String {
             UserInfo.userKey = userSessionKey
                 
             //Printing User Session Keys
-                print(userSession2)
+               // print(userSession2)
                 print(userSessionKey)
                 
             completionHandlerForUserSessionKey(userSessionKey, nil)
             
         } else {
-            completionHandlerForUserSessionKey(nil, "Couldnt find Session Key")
+            completionHandlerForUserSessionKey(nil, "InCorrect Email or Password")
         }
             
-        }
+        } // task end declarations
         task.resume()
         
     }

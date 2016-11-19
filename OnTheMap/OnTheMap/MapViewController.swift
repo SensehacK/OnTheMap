@@ -21,27 +21,36 @@ class MapViewController : UIViewController , MKMapViewDelegate {
     // MARK: View Will appear
     override func viewWillAppear(_ animated: Bool) {
         
+         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         super.viewWillAppear(animated)
         
         ParsingClient.sharedInstance().getUserLocation(userIDUniqueKey: UserInfo.userKey) { (success, error) in
-        let tempLatitude = UserInfo.MapLatitude
-        let tempLongitude = UserInfo.MapLongitude
-        
-        let mapSum = tempLatitude + tempLongitude
-        
-        if mapSum > 0 {
-            performUIUpdatesOnMain {
-                let coordinateLocation = CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLongitude)
-                let coordinatesSpan = MKCoordinateSpanMake(10, 10)
-                let coordinateRegion = MKCoordinateRegion(center: coordinateLocation, span: coordinatesSpan)
-                self.mapViewController.setRegion(coordinateRegion, animated: true)
-                
+            
+            if success! {
+            
+                    let tempLatitude = UserInfo.MapLatitude
+                    let tempLongitude = UserInfo.MapLongitude
+                    
+                    let mapSum = tempLatitude + tempLongitude
+                    
+                    if mapSum > 0 {
+                        performUIUpdatesOnMain {
+                            let coordinateLocation = CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLongitude)
+                            let coordinatesSpan = MKCoordinateSpanMake(10, 10)
+                            let coordinateRegion = MKCoordinateRegion(center: coordinateLocation, span: coordinatesSpan)
+                            self.mapViewController.setRegion(coordinateRegion, animated: true)
+                            
+                        }
+                        
+                            }
             }
             
-        } else {
+            else
+            {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.displayAlertHelper(message: error!)
-        }
-    }
+            }
+    } // success / error Check
     
         
         // Get Multiple Student Locations 
@@ -50,10 +59,14 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         ParsingClient.sharedInstance().getStudentsLocation() { ( success , error) in
             
             if success! {
+                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                
                 // Remove old pins & Reinitialize the map with refreshed Pins
                 self.mapViewController.removeAnnotations(self.mapViewController.annotations)
                 self.reinitializedPopulateMap()
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
         
@@ -71,10 +84,13 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         UdacityClientConvenience.sharedInstance().deleteUserSession() { ( success  , error ) in
             
             if success {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                
                 performUIUpdatesOnMain {
                     self.dismiss(animated: true, completion: nil)
                 }
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
             
@@ -89,11 +105,14 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         ParsingClient.sharedInstance().getStudentsLocation() { ( success ,error) in
             
             if success! {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                
                 performUIUpdatesOnMain {
                    self.mapViewController.removeAnnotations(self.mapViewController.annotations)
                     self.reinitializedPopulateMap()
                 }
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
             
@@ -103,6 +122,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
 
     //Udacity Review Notes
    // The detail disclosure does not appear when tapping a pin so it is not possible to open the student's link. Add the code below to fix this:
+    // For Opening the Pin View of Student 
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"

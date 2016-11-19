@@ -29,6 +29,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var postStatusLink: UITextField!
+    // Location Studying From Label was correct , my other referencing Text Field Labels got referenced to "locationStudyingFrom" instead of "searchLocationTextField"  Silly Me.
     @IBOutlet weak var locationStudyingFrom: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -50,7 +51,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         
         if state == .MapView {
             //Set the default UI State
-            self.configuredUIState = "MapString"
+            self.configuredUIState = "MapView"
             findOnMapButton.isEnabled = true
             searchLocationTextField.isEnabled  = true
             postStatusLink.isEnabled  = false
@@ -145,9 +146,10 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                        self.displayAlertHelper(message: "Sorry we found error while searching for the String in Geolocation Map Kit")
                         return
                     }
-
+                    
+                    // Change the condition check , forgot != False == TRUE + it is guard statement which goes for else {} :)
                     //Guard statement for Results been returned
-                    guard  (results?.isEmpty) != false  else {
+                    guard  (results?.isEmpty) == false  else {
                         self.displayAlertHelper(message: "Sorry we found error while searching for the String in Geolocation Map Kit")
                         return
                     }
@@ -185,7 +187,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
            
                 //ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success ,error)
                   
-                    ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
+                    ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: searchLocationTextField.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                         
                     if success {
                         
@@ -197,7 +199,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                             UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
                             UserInfo.MapLongitude = (self.pinplacemark!.location!.coordinate.longitude)
                             // Also keep track of other information entered by user
-                            UserInfo.MapString = self.locationStudyingFrom.text!
+                            UserInfo.MapString = self.searchLocationTextField.text!
                             UserInfo.UserURLStatus = self.postStatusLink.text!
                             
                             self.dismiss(animated: true, completion: nil)
@@ -216,7 +218,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
             else {
                 // User is updating his Post
                 
-                ParsingClient.sharedInstance().updateUserLocation(userIDUniqueKey: UserInfo.userKey, objectID: UserInfo.objectID , firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
+                ParsingClient.sharedInstance().updateUserLocation(userIDUniqueKey: UserInfo.userKey, objectID: UserInfo.objectID , firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: searchLocationTextField.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                 
                     if success {
                         
@@ -227,7 +229,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                             UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
                             UserInfo.MapLongitude = (self.pinplacemark!.location!.coordinate.longitude)
                             // Also keep track of other information entered by user
-                            UserInfo.MapString = self.locationStudyingFrom.text!
+                            UserInfo.MapString = self.searchLocationTextField.text!
                             UserInfo.UserURLStatus = self.postStatusLink.text!
                             
                             self.dismiss(animated: true, completion: nil)
