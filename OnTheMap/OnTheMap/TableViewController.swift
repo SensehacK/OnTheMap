@@ -44,6 +44,7 @@ class TableViewController : UITableViewController {
     // Configure table cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableListViewCell", for: indexPath)
         let studentTable = StudentStructDict.sharedInstance.studentsDict[indexPath.row]
         
@@ -55,6 +56,13 @@ class TableViewController : UITableViewController {
     
     // Tap on table cell opens student's weblink
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Deselect the sElected Row as advised by Udacity Reviewer Suggestion
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // When a row is selected there's the following problem: 
+        // Changed from customs TableCellView to Subtitle now there wont be Text overlays of Big & small Texts.
+        
         
         // Make sure URL is in correct format
         if let url = URL(string: OnTheMapHelper.sharedInstance().formatURL(url: StudentStructDict.sharedInstance.studentsDict[indexPath.row].mediaURL)) {
