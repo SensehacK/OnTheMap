@@ -147,18 +147,19 @@ class UdacityClientConvenience {
                 return
             }
             
-            let range = Range(uncheckedBounds: (5, data.count - 5))
+            /*let range = Range(uncheckedBounds: (5, data.count - 5))
             let newData = data.subdata(in: range) /* subset response data! */
             //print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-
-            let userData2 = data.subdata(in : Range(5...Int(data.count)))
+                */
+            
+            let newData = data.subdata(in : Range(5...Int(data.count)))
 
             // Parse Data & store it in User Info.swift
             
             let parsedData : AnyObject
 
             do {
-                parsedData = try JSONSerialization.jsonObject(with: userData2, options: .allowFragments) as! NSDictionary
+                parsedData = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! NSDictionary
             } catch {
                 print("Error Catched in Parsing Data")
                 completionHandlerforIdentifyUserWithSessionKey(false, "Error Parsing Data")
