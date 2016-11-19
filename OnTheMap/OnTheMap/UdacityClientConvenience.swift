@@ -149,7 +149,7 @@ class UdacityClientConvenience {
             
             /*let range = Range(uncheckedBounds: (5, data.count - 5))
             let newData = data.subdata(in: range) /* subset response data! */
-            //print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
+            print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
                 */
             
             let newData = data.subdata(in : Range(5...Int(data.count)))

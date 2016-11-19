@@ -117,10 +117,16 @@ class LoginViewController : UIViewController {
     
     
     func completeLogin() {
+        // Console Debug Prints
+        print("In func Complete Login of LoginViewController ")
+        
        
         performUIUpdatesOnMain {
             let controller =
             self.storyboard?.instantiateViewController(withIdentifier: "MapTabBarController") as! UITabBarController
+            
+            // Console Debug Prints
+            print("In func Complete Login in Perform UI Updates on Main of LoginViewController ")
             
             self.present(controller, animated: true, completion: nil)
         }
