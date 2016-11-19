@@ -109,6 +109,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sTk-Cl-8l9">
                                 <frame key="frameInset" minY="64" width="375" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="I3c-Nf-hgt" id="14C-TG-AxE"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,6 +169,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="SoD-3e-05l" id="DTo-MR-CD4"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you Studying From?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AT-Ce-loN">
                                         <constraints>
@@ -195,6 +201,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="SoD-3e-05l" id="ati-Ck-S1s"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43406239280423625" green="0.89411764709999997" blue="0.71018209603923932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -264,7 +273,7 @@
         <!--On The Map-->
         <scene sceneID="jvH-1G-YtC">
             <objects>
-                <tableViewController id="gLL-gn-YQS" customClass="TableViewController" sceneMemberID="viewController">
+                <tableViewController id="gLL-gn-YQS" customClass="TableViewController" customModule="OnTheMap" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="r13-ud-Cbn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -286,9 +295,17 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="q9L-u6-uzY">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="93T-yC-pFQ" userLabel="Logout"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="93T-yC-pFQ" userLabel="Logout">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="gLL-gn-YQS" id="db1-n7-BFM"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="JtR-w8-pd7"/>
+                            <barButtonItem systemItem="refresh" id="JtR-w8-pd7">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="gLL-gn-YQS" id="2en-d4-uNn"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="Map" id="wMf-47-ADw">
                                 <connections>
                                     <segue destination="SoD-3e-05l" kind="presentation" id="1ZZ-gw-AYL"/>

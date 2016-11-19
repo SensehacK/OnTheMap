@@ -15,16 +15,23 @@ import UIKit
 class OnTheMapHelper {
     
     
-    func formattedURL() {
-    
+        func formatURL(url: String) -> String {
+            var formattedURL = url
+            if formattedURL.characters.first != "h"  && formattedURL.characters.first != "H"{
+                formattedURL = "http://\(formattedURL)"
+            }
+            return String(formattedURL.characters.filter { !" ".characters.contains($0) })
+        }
         
-    }
     
     
     
-    func sharedInstance() {
-      
-        
+    
+  class  func sharedInstance() -> OnTheMapHelper {
+        struct Singleton {
+            static var sharedInstance = OnTheMapHelper()
+        }
+        return Singleton.sharedInstance
     }
     
     

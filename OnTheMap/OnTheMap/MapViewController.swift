@@ -136,6 +136,24 @@ class MapViewController : UIViewController , MKMapViewDelegate {
     } // func reinitializedPopulateMap() end
 
     
+    // Open links on Browsers
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        // Make sure URL is in correct format
+        
+        // Can't unwrap properly with View > annotation > Subtitle String URL.
+        //let mediaURL = URL(view.annotation?.subtitle)
+        // let medi = view.annotation?.subtitle
+        //let mediae = URL(string: medi!)
+       // let media = URL (string : (view.annotation?.subtitle)!)
+        
+        
+        let mediaURL = URL(string: OnTheMapHelper.sharedInstance().formatURL(url: ((view.annotation?.subtitle)!)!))
+       
+        
+        UIApplication.shared.open(mediaURL!, options: [:], completionHandler: nil)
+    }
+    
     
     
 

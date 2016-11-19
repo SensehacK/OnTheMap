@@ -7,3 +7,36 @@
 //
 
 import Foundation
+import UIKit
+
+class TableViewController : UITableViewController {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func logoutButtonPressed(_ sender: AnyObject) {
+    }
+    
+    
+    
+    @IBAction func refreshButtonPressed(_ sender: AnyObject) {
+    }
+    
+    
+}
