@@ -62,7 +62,7 @@ class ParsingClient {
             guard let data = data else {
                 //Console Prints for Debugging
                 print(error)
-                print("Error found on 3rd Guard Data Empty UserSessionKey")
+                print("Error found on 2nd Guard Data Empty UserSessionKey")
                 // More meaningful User Error
                 completionHandlerforGetStudentsLocation(false, "Couldn't Download Data")
                 return
@@ -136,21 +136,44 @@ class ParsingClient {
             }
             
             
-            let parsedResult : [String: AnyObject]?
+           // let parsedResult : [String: AnyObject]?
             // Optional & Downcasting for Parsed Result Ambiguity , Cant figure it out.
             
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : AnyObject]
+            
+            if  let parsedResult = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : AnyObject] {
+                
+                // guard statement for error
+                        guard error == nil else {
+                            print(error)
+                            completionHandlerForGetUserLocation(false, "Something is not right, Couldn't get User Location)")
+                            return
+                        }
+                
                 
                 // Search the parsed Result & store it in Student Info Variables for easy access.
                 
+                
+                
                 // Guard Statement for userlocationAttribute dictionary search
-                guard  let userLocationAttributes  = parsedResult?["results"] as? [[String : AnyObject]]
-                    else {
+                   let userLocationAttributes = parsedResult["results"] as! [[String: AnyObject]] 
+                
+                // guard statement for error
+                guard error == nil else {
                     print(error)
-                    completionHandlerForGetUserLocation(false, "Get USerLocationAtrributes returned an error in Results data form of JSON body (data) (func getUserLocation) ")
+                    completionHandlerForGetUserLocation(false, "Something is not right, Couldn't get User Location)")
                     return
                 }
+
+                
+               /* guard  let userLocationAttributes  = parsedResult["results"] as? [[String : AnyObject]]
+                    else {
+                    print(error)
+                        
+                        //console Prints 
+                        print("Get USerLocationAtrributes returned an error in Results data form of JSON body (data) (func getUserLocation) ")
+                    completionHandlerForGetUserLocation(false, "Get USerLocationAtrributes returned an error in Results data form of JSON body (data) (func getUserLocation) ")
+                    return
+                } */
                 
                 
                  //userLocationAttributes has the Json data which consists of "Results"
@@ -176,13 +199,15 @@ class ParsingClient {
                     UserInfo.MapLongitude = lon
                 }
                
-        // Do try CAtch block JSON Serialization if failed pass
-                
-            } catch {
-                print(error)
-                completionHandlerForGetUserLocation(false, "Error in getting User Locations Results Dictionary from Parsed result (func getUserLocation) ")
-                return
             }
+                                        /*
+                                        // Do try CAtch block JSON Serialization if failed pass
+                                        
+                                    } catch {
+                                        print(error)
+                                        completionHandlerForGetUserLocation(false, "Error in getting User Locations Results Dictionary from Parsed result (func getUserLocation) ")
+                                        return
+                                    } */
             
             //Completion Handler Finished
             completionHandlerForGetUserLocation(true, nil)
@@ -261,7 +286,9 @@ class ParsingClient {
             // first guard for error is empty
             guard error == nil else {
                 print(error)
-                completionHandlerForUpdateUserLocation(false, "Error found on 1st Guard UserSessionKey (func updateUserLocation) ")
+                //Console Debug Prints
+                print("Error found on 1st Guard UserSessionKey (func updateUserLocation) ")
+                completionHandlerForUpdateUserLocation(false, error?.localizedDescription)
                 return
             }
             

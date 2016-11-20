@@ -132,6 +132,8 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                 return
             }
       // Start Geolocation Process
+            //Network Activity visible
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
             performUIUpdatesOnMain {
                 
@@ -145,6 +147,8 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                     
                     guard  error == nil else {
                        self.displayAlertHelper(message: "Sorry we found error while searching for the String in Geolocation Map Kit")
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
                     
@@ -152,6 +156,8 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                     //Guard statement for Results been returned
                     guard  (results?.isEmpty) == false  else {
                         self.displayAlertHelper(message: "Sorry we found error while searching for the String in Geolocation Map Kit")
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
                     
@@ -166,9 +172,10 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         self.findOnMapButton.setTitle("Update information", for: UIControlState.normal)
                     }
                     
-            })
-           }
-            
+            }) // Closure End Declaration
+           } // Perform UI Updates End Declaration
+            //Network Activity visible
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         } // Status URL configured UI  } End declaration
         
             // MARK : Status URL configured UI
@@ -187,13 +194,12 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
             if UserInfo.objectID.isEmpty {
            
                 //ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: locationStudyingFrom.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success ,error)
-                  
+                //Network Activity visible
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                
                     ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: searchLocationTextField.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                         
                     if success {
-                        
-                       
-                        
                         performUIUpdatesOnMain {
                             
                             // Set user's location coordinates to center the map on when view controller is dismissed
@@ -209,10 +215,13 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         
                     } else {
                         
-                        
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.displayAlertHelper(message: error!)
                         
                     }
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
             
             } // UserInfo End Object ID } Declaration
@@ -223,6 +232,8 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                 
                     if success {
                         
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = true
                         
                         performUIUpdatesOnMain {
                             
@@ -237,10 +248,15 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         }
                         
                     } else {
+                        //Network Activity visible
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.displayAlertHelper(message: error!)
                         
                     } // else completion
                 } // Update userlocation } completion
+                
+                //Network Activity visible
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
             } // Else Declaration }  // User is updating his Post
   

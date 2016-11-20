@@ -32,8 +32,8 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                     let tempLongitude = UserInfo.MapLongitude
                     
                     let mapSum = tempLatitude + tempLongitude
-                    
-                    if mapSum > 0 {
+                    // Changed Condition checking from "> 0" to "!= 0"
+                    if mapSum != 0 {
                         performUIUpdatesOnMain {
                             let coordinateLocation = CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLongitude)
                             let coordinatesSpan = MKCoordinateSpanMake(10, 10)
@@ -43,13 +43,17 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                         }
                         
                             }
-            }
+            }   // success if statement end
             
             else
             {
+                // Console Debug Print
+                print("View Will Appear Func Error Console Print")
+                print(error)
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            self.displayAlertHelper(message: error!)
+                self.displayAlertHelper(message: error!)
             }
+            
     } // success / error Check
     
         
@@ -84,7 +88,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         UdacityClientConvenience.sharedInstance().deleteUserSession() { ( success  , error ) in
             
             if success {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
                 performUIUpdatesOnMain {
                     self.dismiss(animated: true, completion: nil)
@@ -113,6 +117,8 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                 }
             } else {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                // Console Debug Print
+                print("Error Refresh Button Pressed IBACtion Console Print")
                 self.displayAlertHelper(message: error!)
             }
             

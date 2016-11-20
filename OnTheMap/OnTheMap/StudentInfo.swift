@@ -10,7 +10,7 @@ import Foundation
 
 class StudentInfo {
     
-    
+    // 3rd character changed from X to V APPID
     static let appID="QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     static let restKey="QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     
