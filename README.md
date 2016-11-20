@@ -57,5 +57,21 @@ The "Login" button becomes disabled after application is showing an alert.
 
 
 
+
+4th Review 
+https://review.udacity.com/#!/reviews/277815
+Done : 
+It's not possible to try to login when this happens because you don't enable the button again.
+
+Please remove this unused method.
+
+As per specification this should be a struct.
+
+
+
+
+
+
+
 Practise will surely improve my skills.
 

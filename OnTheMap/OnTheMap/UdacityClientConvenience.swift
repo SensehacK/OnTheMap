@@ -20,10 +20,8 @@ class UdacityClientConvenience {
         return Singleton.sharedInstance
     }
 
-    
     //session initialised
     //var session = URLSession.shared
-    
     
     //Mark : Get User Session Key
     
@@ -224,7 +222,6 @@ class UdacityClientConvenience {
             print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
             
             */
-            
         }
         task.resume()
     }

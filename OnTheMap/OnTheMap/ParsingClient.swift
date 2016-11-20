@@ -19,8 +19,6 @@ class ParsingClient {
         }
         return Singleton.sharedInstance
     }
-
-    
     
     
     //MARK : Helper Convenience Functions
@@ -125,7 +123,6 @@ class ParsingClient {
         
         task.resume()
     }
-    
     
     
     //MARK : Get User's Location
@@ -260,8 +257,7 @@ class ParsingClient {
         task.resume()
     }
     
-    
-    
+
     //MARK : Post User's Location
     // Post User's location
     

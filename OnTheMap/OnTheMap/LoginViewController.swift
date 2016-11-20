@@ -33,11 +33,13 @@ class LoginViewController : UIViewController {
         //Get Valid username 
         // Still "@" Valid statement is not been checked.
         guard emailAddressTextField.text != nil && (emailAddressTextField.text?.contains("@"))! else {
+            setUIEnabled(enabled: true)
             displayAlertHelper(message: "Please Enter a Valid Email Address")
             return
         }
         // Guard Password is Not Empty.
         guard passwordTextField.text != nil else {
+            setUIEnabled(enabled: true)
             displayAlertHelper(message: "Please Enter a Password")
             return
         }
@@ -94,12 +96,6 @@ class LoginViewController : UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
     // MARK: Hide keyboard when return key is pressed and perform submit action
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -130,7 +126,6 @@ class LoginViewController : UIViewController {
     }
     
     
-    
     func completeLogin() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Console Debug Prints
@@ -147,7 +142,6 @@ class LoginViewController : UIViewController {
             
             self.present(controller, animated: true, completion: nil)
         }
-        
     }
 
 }

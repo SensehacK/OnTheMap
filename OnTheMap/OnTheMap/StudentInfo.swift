@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StudentInfo {
+struct StudentInfo {
     
     // 3rd character changed from X to V APPID
     static let appID="QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"

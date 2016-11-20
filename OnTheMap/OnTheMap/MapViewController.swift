@@ -13,10 +13,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
     
     @IBOutlet weak var mapViewController: MKMapView!
     
-    
-    // let parsedClient = ParsingClient.sharedInstance() 
-    
-
+    // let parsedClient = ParsingClient.sharedInstance() // Just for More coding experiments I kept this code.
     
     // MARK: View Will appear
     override func viewWillAppear(_ animated: Bool) {
@@ -58,9 +55,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
     } // success / error Check
     
         
-        // Get Multiple Student Locations 
-        
-        
+        // Get Multiple Student Locations
         ParsingClient.sharedInstance().getStudentsLocation() { ( success , error) in
             
             if success! {
@@ -76,15 +71,12 @@ class MapViewController : UIViewController , MKMapViewDelegate {
             }
         
         }  // getStudentsLocation End declaration
-        
-    
     }  // View will appear End declaration 
     
     
     // IBACtions 
     
     // MARK: Logout Button IBAction
-    
     @IBAction func logoutButtonPressed(_ sender: AnyObject) {
         UdacityClientConvenience.sharedInstance().deleteUserSession() { ( success  , error ) in
             
@@ -99,9 +91,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
-            
         }//  Delete USer Session End Declaration
-        
     } //  Logout End Declaration
     
     
@@ -123,9 +113,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                 print("Error Refresh Button Pressed IBACtion Console Print")
                 self.displayAlertHelper(message: error!)
             }
-            
         } // get Student Location End Declaration
-
     } // Refresh button End Declaration
 
     //Udacity Review Notes
@@ -145,12 +133,8 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
-        
     }
-    
-    
     
     
     // MARK: Function to ReInitialised  map with students Locations Markers
@@ -202,7 +186,4 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         UIApplication.shared.open(mediaURL!, options: [:], completionHandler: nil)
     }
     
-    
-    
-
 } // Class End declaration

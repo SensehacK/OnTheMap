@@ -13,7 +13,6 @@ import MapKit
 class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDelegate {
     
     //UI view Enums
-    
     enum UIState {
         case MapView , StatusURL
     }
@@ -22,9 +21,6 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
     
     var pinplacemark: CLPlacemark? = nil
     
-    
-    
-    
     // Outlets
     
     @IBOutlet weak var cancelButton: UIButton!
@@ -32,17 +28,11 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
     // Location Studying From Label was correct , my other referencing Text Field Labels got referenced to "locationStudyingFrom" instead of "searchLocationTextField"  Silly Me.
     @IBOutlet weak var locationStudyingFrom: UILabel!
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var searchLocationTextField: UITextField!
-    
     @IBOutlet weak var topView: UIView!
-    
     @IBOutlet weak var midView: UIView!
-    
     @IBOutlet weak var bottomView: UIView!
-    
     @IBOutlet weak var findOnMapButton: UIButton!
-    
     
     
     // Configure UI based on Input given , Default Loading is MapView
@@ -77,7 +67,6 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
 
     
     // MARK: ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,9 +76,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
             if self.postStatusLink.tag == 1 {
                 self.postStatusLink.text = "https://"
             }
-           
             self.configureUI(state: .MapView)
-            
         }
         
     }
@@ -105,11 +92,9 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
   
     // IBActions
     @IBAction func cancelButtonPressed(_ sender: AnyObject) {
-        
         dismiss(animated : true, completion : nil)
     }
     
-
     
     @IBAction func findOnMapButtonPressed(_ sender: AnyObject) {
         
@@ -247,19 +232,14 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         
                     } // else completion
                 } // Update userlocation } completion
-                
                 //Network Activity visible
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             } // Else Declaration }  // User is updating his Post
-  
         } // Status URL configured UI } End Declaration
-        
     }  // findOnMapButtonPressed End } Declaration
     
-    
-    
-    
+  
     
     // MARK: Hide keyboard when return key is pressed and perform submit action
     
@@ -278,6 +258,4 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         }
     }
 
-    
-       
 }
