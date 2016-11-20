@@ -61,7 +61,9 @@ class UdacityClientConvenience {
             // first guard for error is empty
             guard error == nil else {
                 print(error)
-                completionHandlerForUserSessionKey(nil, "Error found on 1st Guard UserSessionKey")
+                // Console Debug Prints
+                print("Error found on 1st Guard UserSessionKey ")
+                completionHandlerForUserSessionKey(nil, "Please check your Internet Connection")
                 return
             }
             
@@ -75,7 +77,9 @@ class UdacityClientConvenience {
             
             //Data is empty or not
             guard let data = data else {
-                completionHandlerForUserSessionKey(nil, "Error found on 3rd Guard Data Empty UserSessionKey")
+                // Console Debug Prints
+                print("Error found on 2nd Guard Data Empty UserSessionKey")
+                completionHandlerForUserSessionKey(nil,"Server is Unreachable at the Moment")
                 return
             }
             
@@ -95,16 +99,14 @@ class UdacityClientConvenience {
                 print("In func getUserSessionKey PArsing Data with JSONSerialization  task network request ")
                 
             } catch {
-                print("Error Catched in Parsing Data in JSONSerialization Block ")
-                completionHandlerForUserSessionKey(nil, "Error Parsing Data in JSON Serialization block of getUserSession")
+                print("Error Catched in Parsing Data in JSONSerialization Block getUserSession ")
+                completionHandlerForUserSessionKey(nil, error.localizedDescription)
                 return
             }
             
-            
            /*  if let account = parsedData["account"] as! [String:Any] {
-  
              let userSession2 = account["key"] as! String
-        } */
+             } */
             
             if let userSessionKey = (parsedData["account"] as? [String: Any])? ["key"] as? String {
             UserInfo.userKey = userSessionKey
@@ -115,7 +117,8 @@ class UdacityClientConvenience {
                 
             completionHandlerForUserSessionKey(userSessionKey, nil)
             
-        } else {
+        }
+            else {
             completionHandlerForUserSessionKey(nil, "InCorrect Email or Password")
         }
             
@@ -131,22 +134,21 @@ class UdacityClientConvenience {
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(userSessionKey)")!)
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error...
-                return
-            }
+            // Handle error... if error != nil { return }
             
             // first guard for error is empty
             guard error == nil else {
                 print(error)
+                
                 completionHandlerforIdentifyUserWithSessionKey(false, "Error found on 1st Guard UserSessionKey")
                 return
             }
             
-            
-            
             //Data is empty or not
             guard let data = data else {
-                completionHandlerforIdentifyUserWithSessionKey(false, "Error found on 3rd Guard Data Empty UserSessionKey")
+                // Console Debug Prints
+                print("Error found on 3rd Guard Data Empty Identify UserSessionKey")
+                completionHandlerforIdentifyUserWithSessionKey(false, error?.localizedDescription)
                 return
             }
             
