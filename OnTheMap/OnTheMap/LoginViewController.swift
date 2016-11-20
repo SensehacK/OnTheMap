@@ -83,6 +83,7 @@ class LoginViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUIEnabled(enabled: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -129,6 +130,7 @@ class LoginViewController : UIViewController {
         
        
         performUIUpdatesOnMain {
+            self.setUIEnabled(enabled: true)
             let controller =
             self.storyboard?.instantiateViewController(withIdentifier: "MapTabBarController") as! UITabBarController
             

@@ -92,6 +92,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                 
                 performUIUpdatesOnMain {
                     self.dismiss(animated: true, completion: nil)
+                    
                 }
             } else {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
