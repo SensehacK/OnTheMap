@@ -16,7 +16,7 @@ class TableViewController : UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         ParsingClient.sharedInstance().getStudentsLocation() { (success, error) in
             
             if success! {
@@ -28,12 +28,13 @@ class TableViewController : UITableViewController {
                 
             } else {
                 
-                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
                 
             }
             
         }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     // Set number of rows

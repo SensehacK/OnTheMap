@@ -21,13 +21,14 @@ class LoginViewController : UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    
+    var logInAgain : Bool?
     // Login Button Actions
     
     @IBAction func loginButtonPressed(_ sender: AnyObject) {
         
-        //Disabled UI
+        //Disable UI
         setUIEnabled(enabled: false)
+        
         
         //Get Valid username 
         // Still "@" Valid statement is not been checked.
@@ -78,11 +79,17 @@ class LoginViewController : UIViewController {
     
     @IBAction func signUpButtonPressed(_ sender: AnyObject) {
         displayAlertHelper(message: "Please Sign up at https://www.udacity.com/account/auth#!/signup")
+        setUIEnabled(enabled: true)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        emailAddressTextField.text = ""
+        passwordTextField.text = ""
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        //logInAgain = false
         setUIEnabled(enabled: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -101,13 +108,14 @@ class LoginViewController : UIViewController {
         return false
     }
 
-    
-    
-    
-    
-    
     func setUIEnabled (enabled : Bool) {
         loginButton.isEnabled = enabled
+        
+        /* //Clear the Text fields after completely loggin in again.
+        if logInAgain! {
+            emailAddressTextField.text = ""
+            passwordTextField.text     = ""
+        } */
         
         performUIUpdatesOnMain {
             
@@ -127,7 +135,7 @@ class LoginViewController : UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         // Console Debug Prints
         print("In func Complete Login of LoginViewController ")
-        
+        logInAgain = true
        
         performUIUpdatesOnMain {
             self.setUIEnabled(enabled: true)

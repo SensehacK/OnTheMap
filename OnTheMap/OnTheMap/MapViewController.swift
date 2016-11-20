@@ -27,7 +27,8 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         ParsingClient.sharedInstance().getUserLocation(userIDUniqueKey: UserInfo.userKey) { (success, error) in
             
             if success! {
-            
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                
                     let tempLatitude = UserInfo.MapLatitude
                     let tempLongitude = UserInfo.MapLongitude
                     
@@ -158,6 +159,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         
         // Store map annotations
         var annotations = [MKPointAnnotation]()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         for ss in StudentStructDict.sharedInstance.studentsDict {
             
@@ -178,7 +180,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
         
         // Add annotations to map
         mapViewController.addAnnotations(annotations)
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     } // func reinitializedPopulateMap() end
 
     
