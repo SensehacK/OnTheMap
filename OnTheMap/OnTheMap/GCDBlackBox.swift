@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
-
-func performUIUpdatesOnMain(updates  : @escaping() -> Void) {
-    DispatchQueue.main.async() {
-    updates()
+extension UIViewController {
+    func performUIUpdatesOnMain(updates  : @escaping() -> Void) {
+        DispatchQueue.main.async() {
+            updates()
+        }
+        
     }
     
 }

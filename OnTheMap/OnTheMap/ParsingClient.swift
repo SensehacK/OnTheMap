@@ -45,12 +45,12 @@ class ParsingClient {
             // guard statements incoming
             
             // first guard for error is empty
-                    guard error == nil else {
-                        print(error)
-                        print("Error found on 1st Guard UserSessionKey")
-                        completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
-                        return
-                    }
+            guard error == nil else {
+                print(error)
+                print("Error found on 1st Guard UserSessionKey")
+                completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
+                return
+            }
             
             /*
             // Status code msgs
@@ -89,19 +89,19 @@ class ParsingClient {
                     return
                 }
                 
-                
-                                if (parsedResult["results"] != nil) {
-                                    // Search the parsed Result & store it in Student Struct Dictionary
-                                    StudentStructDict.sharedInstance.studentsDict = StudentInfo.studentOfResult(results: parsedResult["results"] as! [[String : AnyObject]])
-                                    
-                                    completionHandlerforGetStudentsLocation(true, nil)
+    
+                    if (parsedResult["results"] != nil) {
+                        // Search the parsed Result & store it in Student Struct Dictionary
+                        StudentStructDict.sharedInstance.studentsDict = StudentInfo.studentOfResult(results: parsedResult["results"] as! [[String : AnyObject]])
+                        
+                        completionHandlerforGetStudentsLocation(true, nil)
 
-                                    
-                                }
-                                else {
-                                   
-                                    completionHandlerforGetStudentsLocation(false,"Something is not right, Couldn't get User Location)" )
-                                }
+                        
+                    }
+                    else {
+                       
+                        completionHandlerforGetStudentsLocation(false,"Something is not right, Couldn't get User Location)" )
+                    }
             } else {
                 // Return error if Server not reachable 
                 // Console Debug Prints
@@ -150,7 +150,9 @@ class ParsingClient {
             // first guard for error is empty
             guard error == nil else {
                 print(error)
-                completionHandlerForGetUserLocation(false, "Error found on 1st Guard UserSessionKey (func getUserLocation)")
+                // Console Debug Prints
+                print("Error found on 1st Guard UserSessionKey (func getUserLocation)")
+                completionHandlerForGetUserLocation(false,error?.localizedDescription)
                 return
             }
             
@@ -164,7 +166,9 @@ class ParsingClient {
             
             //Data is empty or not
             guard let data = data else {
-                completionHandlerForGetUserLocation(false, "Error found on 3rd Guard Data Empty UserSessionKey (func getUserLocation)")
+                // Console Debug Prints
+                print("Error found on 3rd Guard Data Empty UserSessionKey (func getUserLocation)")
+                completionHandlerForGetUserLocation(false, error?.localizedDescription)
                 return
             }
             
@@ -176,11 +180,11 @@ class ParsingClient {
             if  let parsedResult = (try! JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String : AnyObject] {
                 
                 // guard statement for error
-                        guard error == nil else {
-                            print(error)
-                            completionHandlerForGetUserLocation(false, "Something is not right, Couldn't get User Location)")
-                            return
-                        }
+                guard error == nil else {
+                    print(error)
+                    completionHandlerForGetUserLocation(false, "Something is not right, Couldn't get User Location)")
+                    return
+                }
                 
                 
                 // Search the parsed Result & store it in Student Info Variables for easy access.
@@ -243,16 +247,14 @@ class ParsingClient {
                 completionHandlerForGetUserLocation(false,error?.localizedDescription)
                 
             }
-                                        /*
-                                        // Do try CAtch block JSON Serialization if failed pass
-                                        
-                                    } catch {
-                                        print(error)
-                                        completionHandlerForGetUserLocation(false, "Error in getting User Locations Results Dictionary from Parsed result (func getUserLocation) ")
-                                        return
-                                    } */
-            
-            
+                /*
+                // Do try CAtch block JSON Serialization if failed pass
+                
+            } catch {
+                print(error)
+                completionHandlerForGetUserLocation(false, "Error in getting User Locations Results Dictionary from Parsed result (func getUserLocation) ")
+                return
+            } */
 
         }
         task.resume()
@@ -299,9 +301,6 @@ class ParsingClient {
         task.resume()
     }
     
-    
-    
-    
     //MARK : Update User's Location
     // Update User's Location
     
@@ -324,9 +323,7 @@ class ParsingClient {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
-            
             // guard statements incoming
-            
             // first guard for error is empty
             guard error == nil else {
                 print(error)
@@ -372,10 +369,7 @@ class ParsingClient {
             completionHandlerForRemoveUserLocation(true, nil)
         }
         task.resume()
-    }
-    
-    //Last End declaration
-    
+    }//Last Function End declaration
    
-}
+} // Class end Declaration
 

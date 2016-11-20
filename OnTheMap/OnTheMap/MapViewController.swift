@@ -34,7 +34,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
                     let mapSum = tempLatitude + tempLongitude
                     // Changed Condition checking from "> 0" to "!= 0"
                     if mapSum != 0 {
-                        performUIUpdatesOnMain {
+                        self.performUIUpdatesOnMain {
                             let coordinateLocation = CLLocationCoordinate2D(latitude: tempLatitude, longitude: tempLongitude)
                             let coordinatesSpan = MKCoordinateSpanMake(10, 10)
                             let coordinateRegion = MKCoordinateRegion(center: coordinateLocation, span: coordinatesSpan)
@@ -90,7 +90,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
             if success {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
-                performUIUpdatesOnMain {
+                self.performUIUpdatesOnMain {
                     self.dismiss(animated: true, completion: nil)
                     
                 }
@@ -112,7 +112,7 @@ class MapViewController : UIViewController , MKMapViewDelegate {
             if success! {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 
-                performUIUpdatesOnMain {
+                self.performUIUpdatesOnMain {
                    self.mapViewController.removeAnnotations(self.mapViewController.annotations)
                     self.reinitializedPopulateMap()
                 }

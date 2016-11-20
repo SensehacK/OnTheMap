@@ -8,8 +8,8 @@
 
 import Foundation
 
-
-class UserInfo {
+//Changed from class to struct
+struct UserInfo {
     
     static var firstName = ""
     static var lastName = ""

@@ -22,7 +22,7 @@ class TableViewController : UITableViewController {
             if success! {
                 
                 // Reload table data
-                performUIUpdatesOnMain {
+                self.performUIUpdatesOnMain {
                     self.tableView.reloadData()
                 }
                 
@@ -134,7 +134,7 @@ class TableViewController : UITableViewController {
         UdacityClientConvenience.sharedInstance().deleteUserSession() { (success ,error) in
             if success {
                 
-                performUIUpdatesOnMain {
+                self.performUIUpdatesOnMain {
                     self.dismiss(animated: true, completion: nil)
                     
                 }
@@ -151,7 +151,7 @@ class TableViewController : UITableViewController {
         ParsingClient.sharedInstance().getStudentsLocation() { (success , error) in
             
             if success! {
-                performUIUpdatesOnMain {
+                self.performUIUpdatesOnMain {
                     self.tableView.reloadData()
                 }
             } else {

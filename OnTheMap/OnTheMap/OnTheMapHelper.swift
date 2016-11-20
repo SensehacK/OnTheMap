@@ -15,7 +15,7 @@ import UIKit
 class OnTheMapHelper {
     
     
-        func formatURL(url: String) -> String {
+    func formatURL(url: String) -> String {
             var formattedURL = url
             if formattedURL.characters.first != "h"  && formattedURL.characters.first != "H"{
                 formattedURL = "http://\(formattedURL)"
@@ -27,7 +27,7 @@ class OnTheMapHelper {
     
     
     
-  class  func sharedInstance() -> OnTheMapHelper {
+    class  func sharedInstance() -> OnTheMapHelper {
         struct Singleton {
             static var sharedInstance = OnTheMapHelper()
         }
@@ -36,6 +36,8 @@ class OnTheMapHelper {
     
     
 }
+
+//Extension
 
 extension UIViewController {
     

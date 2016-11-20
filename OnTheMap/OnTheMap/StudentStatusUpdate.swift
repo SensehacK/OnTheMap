@@ -94,29 +94,22 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
         
     }
     
+    /* 
+     Commented as it doesn't serve its purpose
     // MARK: ViewWillAppear
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-    }
-    
-    
-    
-    
-    
-    
+    } */
+  
     // IBActions
-    
-    
     @IBAction func cancelButtonPressed(_ sender: AnyObject) {
         
         dismiss(animated : true, completion : nil)
     }
     
-    
-    
-    
+
     
     @IBAction func findOnMapButtonPressed(_ sender: AnyObject) {
         
@@ -139,7 +132,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                 
                 // GeoLocator Object
                 
-                let geocoder  = CLGeocoder ()
+                let geocoder  = CLGeocoder()
                 
                 geocoder.geocodeAddressString(self.searchLocationTextField.text!, completionHandler :{ (results , error) in
             
@@ -200,7 +193,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                     ParsingClient.sharedInstance().postUserLocation(userIDUniqueKey: UserInfo.userKey, firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: searchLocationTextField.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                         
                     if success {
-                        performUIUpdatesOnMain {
+                        self.performUIUpdatesOnMain {
                             
                             // Set user's location coordinates to center the map on when view controller is dismissed
                             UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
@@ -235,7 +228,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
                         //Network Activity visible
                         UIApplication.shared.isNetworkActivityIndicatorVisible = true
                         
-                        performUIUpdatesOnMain {
+                        self.performUIUpdatesOnMain {
                             
                             // Set user's location coordinates to center the map on when view controller is dismissed
                             UserInfo.MapLatitude = (self.pinplacemark!.location!.coordinate.latitude)
