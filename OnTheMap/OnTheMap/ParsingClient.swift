@@ -45,12 +45,13 @@ class ParsingClient {
             // guard statements incoming
             
             // first guard for error is empty
-            guard error == nil else {
-                print(error)
-                print("Error found on 1st Guard UserSessionKey")
-                completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
-                return
-            }
+                    guard error == nil else {
+                        print(error)
+                        print("Error found on 1st Guard UserSessionKey")
+                        completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
+                        return
+                    }
+            
             /*
             // Status code msgs
             guard let statusCodes = (response as? HTTPURLResponse)?.statusCode , statusCodes >= 200 && statusCodes <= 299 else {
@@ -72,24 +73,56 @@ class ParsingClient {
             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
              */
             
-            let parsedResult : [String : AnyObject]
+           // let parsedResult : [String : AnyObject]
             // Optional & Downcasting for Parsed Result Ambiguity , Cant figure it out.
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String : AnyObject]
+            //do {
+            if let parsedResult = (try! JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String : AnyObject] {
                 
-              // Search the parsed Result & store it in Student Struct Dictionary
-                StudentStructDict.sharedInstance.studentsDict = StudentInfo.studentOfResult(results: parsedResult["results"] as! [[String : AnyObject]])
                 
-            } catch {
+                //console Prints
+                print("In func getStudentsLocation after  JSON Serialization try block")
+                
+                // guard statement for error
+                guard error == nil else {
+                    print(error)
+                    completionHandlerforGetStudentsLocation(false, "Something is not right, Couldn't get User Location)")
+                    return
+                }
+                
+                
+                                if (parsedResult["results"] != nil) {
+                                    // Search the parsed Result & store it in Student Struct Dictionary
+                                    StudentStructDict.sharedInstance.studentsDict = StudentInfo.studentOfResult(results: parsedResult["results"] as! [[String : AnyObject]])
+                                    
+                                    completionHandlerforGetStudentsLocation(true, nil)
+
+                                    
+                                }
+                                else {
+                                   
+                                    completionHandlerforGetStudentsLocation(false,"Something is not right, Couldn't get User Location)" )
+                                }
+            } else {
+                // Return error if Server not reachable 
+                // Console Debug Prints
+                print(" In else statement of parsedResults result retrieval from server")
+                print("Couldn't get student locations results from server , Server Unreachable")
+                completionHandlerforGetStudentsLocation(false, error?.localizedDescription)
+                
+            }
+            
+            /* catch {
                 print("Error in getting User Locations Results Dictionary from Parsed result ")
                 print(error)
                 completionHandlerforGetStudentsLocation(false, nil)
                 return
-            }
+            } */
+            
             //Completion Handler Finished
-            completionHandlerforGetStudentsLocation(true, nil)
+           
             
         }
+        
         task.resume()
     }
     
@@ -140,7 +173,7 @@ class ParsingClient {
             // Optional & Downcasting for Parsed Result Ambiguity , Cant figure it out.
             
             
-            if  let parsedResult = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : AnyObject] {
+            if  let parsedResult = (try! JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String : AnyObject] {
                 
                 // guard statement for error
                         guard error == nil else {
@@ -154,8 +187,8 @@ class ParsingClient {
                 
                 
                 
-                // Guard Statement for userlocationAttribute dictionary search
-                   let userLocationAttributes = parsedResult["results"] as! [[String: AnyObject]] 
+                // Guard Statement Removed  for userlocationAttribute dictionary search
+                   let userLocationAttributes = parsedResult["results"] as? [[String: AnyObject]]
                 
                 // guard statement for error
                 guard error == nil else {
@@ -179,26 +212,36 @@ class ParsingClient {
                  //userLocationAttributes has the Json data which consists of "Results"
                 // Find other attributes & store it sequentially in Student Info .swift
                 
-                if let usermapstring = userLocationAttributes.last?["mapString"] as? String {
+                if let usermapstring = userLocationAttributes?.last?["mapString"] as? String {
                    UserInfo.MapString = usermapstring
                 }
                 
-                if let userurlstatus = userLocationAttributes.last?["mediaURL"] as? String {
+                if let userurlstatus = userLocationAttributes?.last?["mediaURL"] as? String {
                     UserInfo.UserURLStatus = userurlstatus
                 }
                 
-                if let objectid = userLocationAttributes.last?["objectID"] as? String {
+                if let objectid = userLocationAttributes?.last?["objectID"] as? String {
                     UserInfo.objectID = objectid
                 }
                 
-                if let lat = userLocationAttributes.last?["latitude"] as? Double {
+                if let lat = userLocationAttributes?.last?["latitude"] as? Double {
                     UserInfo.MapLatitude = lat
                 }
                 
-                if let lon = userLocationAttributes.last?["longitude"] as? Double {
+                if let lon = userLocationAttributes?.last?["longitude"] as? Double {
                     UserInfo.MapLongitude = lon
                 }
-               
+                
+                //Completion Handler Finished
+                completionHandlerForGetUserLocation(true, nil)
+            } else {
+                // Return error if Server not reachable
+                // Console Debug Prints
+                print(" In else statement of parsedResults of UserLocation result retrieval from server")
+                print("Couldn't get results from server , Server Unreachable")
+                
+                completionHandlerForGetUserLocation(false,error?.localizedDescription)
+                
             }
                                         /*
                                         // Do try CAtch block JSON Serialization if failed pass
@@ -209,8 +252,7 @@ class ParsingClient {
                                         return
                                     } */
             
-            //Completion Handler Finished
-            completionHandlerForGetUserLocation(true, nil)
+            
 
         }
         task.resume()
@@ -244,7 +286,9 @@ class ParsingClient {
             // first guard for error is empty
             guard error == nil else {
                 print(error)
-                completionHandlerForPostUserLocation(false, "Error found on 1st Guard UserSessionKey ( func postUserLocation)")
+                //Console Debug Prints
+                print("Error found on 1st Guard UserSessionKey ( func postUserLocation)")
+                completionHandlerForPostUserLocation(false, error?.localizedDescription)
                 return
             }
             
