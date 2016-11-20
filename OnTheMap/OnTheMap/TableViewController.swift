@@ -102,7 +102,7 @@ class TableViewController : UITableViewController {
             ParsingClient.sharedInstance().removeUserLocation(objectID: thisRowStudent.objectID)  { (success, error) in
                 
                 if success! {
-
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = true
                     // Reset user information locally
                     // There's only one API call in map view to check whether current user has posted before
                     // So this is to keep track of things internally
@@ -116,7 +116,7 @@ class TableViewController : UITableViewController {
                     
                 } else {
                     
-                    
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.displayAlertHelper(message: error!)
                     
                 }
@@ -125,7 +125,7 @@ class TableViewController : UITableViewController {
             performUIUpdatesOnMain {
                 self.tableView.reloadData()
             }
-            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         } // editing If delete ends
     }  // func TableView end declaration
     
@@ -133,6 +133,7 @@ class TableViewController : UITableViewController {
     
     @IBAction func logoutButtonPressed(_ sender: AnyObject) {
         UdacityClientConvenience.sharedInstance().deleteUserSession() { (success ,error) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if success {
                 
                 self.performUIUpdatesOnMain {
@@ -140,25 +141,28 @@ class TableViewController : UITableViewController {
                     
                 }
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
         }
-        
+       UIApplication.shared.isNetworkActivityIndicatorVisible = false
     } // Func ends
     
     
     
     @IBAction func refreshButtonPressed(_ sender: AnyObject) {
         ParsingClient.sharedInstance().getStudentsLocation() { (success , error) in
-            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if success! {
                 self.performUIUpdatesOnMain {
                     self.tableView.reloadData()
                 }
             } else {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.displayAlertHelper(message: error!)
             }
         }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     } // func ends
     
     

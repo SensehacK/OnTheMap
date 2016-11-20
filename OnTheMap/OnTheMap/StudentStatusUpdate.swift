@@ -220,7 +220,7 @@ class StudentStatusUpdate : UIViewController , UITextFieldDelegate, MKMapViewDel
             } // UserInfo End Object ID } Declaration
             else {
                 // User is updating his Post
-                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 ParsingClient.sharedInstance().updateUserLocation(userIDUniqueKey: UserInfo.userKey, objectID: UserInfo.objectID , firstName: UserInfo.firstName, lastName: UserInfo.lastName, mapString: searchLocationTextField.text!, mediaURL: self.postStatusLink.text!, latitude: self.pinplacemark!.location!.coordinate.latitude, longitude: self.pinplacemark!.location!.coordinate.longitude) { (success , error ) in
                 
                     if success {
